@@ -1,5 +1,5 @@
 # SpecificMutualism
-A place to share code for the specificity and generalism in mutualisms project
+A place to share code for the specificity and generalism in mutualisms project. Brief description of included scripts beolw: 
 ### Cooperative Stability Analysis
 Code for linear stability analysis, and center manifold theory stability analysis: cooperatively specialized hosts. 
 ### Antagonistic Stability Analysis
