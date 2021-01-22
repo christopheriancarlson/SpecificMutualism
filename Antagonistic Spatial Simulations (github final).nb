@@ -1,0 +1,742 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     27821,        734]
+NotebookOptionsPosition[     24554,        689]
+NotebookOutlinePosition[     24950,        705]
+CellTagsIndexPosition[     24907,        702]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"ClearAll", "[", "\"\<Global`*\>\"", "]"}]], "Input",
+ CellChangeTimes->{3.8127059695684566`*^9},
+ CellLabel->
+  "In[176]:=",ExpressionUUID->"04cf2869-b07a-4f5d-be1a-6a35b049f498"],
+
+Cell[TextData[{
+ "Requires the RDLab mathematica package found ",
+ ButtonBox["here",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["https://library.wolfram.com/infocenter/MathSource/4433/"], None},
+  ButtonNote->"https://library.wolfram.com/infocenter/MathSource/4433/"]
+}], "Text",
+ CellChangeTimes->{
+  3.8202768728465223`*^9},ExpressionUUID->"58cf19de-992c-4c7c-af7d-\
+5fcd84780e72"],
+
+Cell[BoxData[
+ RowBox[{"Get", "[", 
+  RowBox[{
+   RowBox[{"NotebookDirectory", "[", "]"}], "<>", 
+   "\"\<ReactionDiffusionLab.m\>\""}], "]"}]], "Input",
+ CellChangeTimes->{{3.812705977802724*^9, 3.81270599074527*^9}},
+ CellLabel->
+  "In[266]:=",ExpressionUUID->"957d48c8-6b8d-4753-b703-0149b55a952d"],
+
+Cell[TextData[ButtonBox["",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["https://library.wolfram.com/infocenter/MathSource/4433/"], None},
+ ButtonNote->
+  "https://library.wolfram.com/infocenter/MathSource/4433/"]], "Text",
+ CellChangeTimes->{{3.820276252132642*^9, 3.8202762771621847`*^9}, {
+   3.820276819241742*^9, 3.8202768331627283`*^9}, 
+   3.820276868101973*^9},ExpressionUUID->"02e328c6-8959-46ad-9db1-\
+796a147418fc"],
+
+Cell["Define our system for antagonistic Specialization: ", "Text",
+ CellChangeTimes->{{3.812705993778186*^9, 
+  3.812706002148419*^9}},ExpressionUUID->"2d306df9-f0b2-42fb-a10f-\
+37e945d93751"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ANTAG", "=", " ", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"-", "1"}], "+", "u"}], ")"}], " ", "u", " ", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"-", "v1"}], "+", "v2"}], ")"}], " ", "x", " ", 
+       RowBox[{"(", 
+        RowBox[{"f\[Alpha]", "-", "\[Alpha]"}], ")"}]}], ",", 
+      RowBox[{"v1", " ", "x", " ", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"-", "f\[Alpha]"}], " ", 
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"-", "1"}], "+", "v1", "+", 
+            RowBox[{"u", " ", 
+             RowBox[{"(", 
+              RowBox[{"1", "-", "v1", "+", "v2"}], ")"}]}]}], ")"}]}], "+", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"u", "-", 
+            RowBox[{"u", " ", "v1"}], "+", 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"-", "1"}], "+", "u"}], ")"}], " ", "v2"}]}], ")"}], 
+          " ", "\[Alpha]"}], "+", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"-", "1"}], "+", "v1", "+", "v2"}], ")"}], " ", 
+          "\[Alpha]g"}]}], ")"}]}], ",", 
+      RowBox[{"v2", " ", "x", " ", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"-", "f\[Alpha]"}], " ", "v1"}], "+", 
+         RowBox[{"u", " ", 
+          RowBox[{"(", 
+           RowBox[{"1", "+", "v1", "-", "v2"}], ")"}], " ", 
+          RowBox[{"(", 
+           RowBox[{"f\[Alpha]", "-", "\[Alpha]"}], ")"}]}], "+", "\[Alpha]", 
+         "-", 
+         RowBox[{"v2", " ", "\[Alpha]"}], "+", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"-", "1"}], "+", "v1", "+", "v2"}], ")"}], " ", 
+          "\[Alpha]g"}]}], ")"}]}]}], "}"}], "//.", " ", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"f\[Alpha]", "\[Rule]", " ", "0.3"}], ",", 
+      RowBox[{"\[Alpha]", "\[Rule]", " ", "0.9"}], ",", " ", 
+      RowBox[{"\[Alpha]g", " ", "\[Rule]", " ", "0.5"}], ",", " ", 
+      RowBox[{"x", "\[Rule]", " ", "0.5"}]}], "}"}]}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.812706034118299*^9, 3.812706062869897*^9}, 
+   3.812706276138609*^9, {3.82027710939946*^9, 3.820277132954042*^9}, 
+   3.820277487996966*^9, {3.820277599301175*^9, 3.820277609876645*^9}, {
+   3.820277641147038*^9, 3.820277645617887*^9}},
+ CellLabel->
+  "In[318]:=",ExpressionUUID->"ea6df3e3-7f9a-4df3-9517-0fac10a02747"],
+
+Cell["\<\
+Where w is the frequency of host 2, v is the frequency of host 1, and u is \
+the frequency of symbiont 1. \[CapitalAlpha] is the matched value of \
+extraction, alpha, \[Alpha] is the mismatched value of alpha, \[Delta] is the \
+generalist value of alpha, s is specialist host proportion of resource \
+traded, and g is the generalist host proportion of its resource shared. \
+\>", "Text",
+ CellChangeTimes->{
+  3.8127060289784822`*^9, {3.812706100407866*^9, 
+   3.812706148928445*^9}},ExpressionUUID->"275d7bc3-289a-4ced-852e-\
+5b157f5381d5"],
+
+Cell["\<\
+We considered the diffusion of these strategists across a finite x y plane \
+with absorbing borders from an initially random distribution: \
+\>", "Text",
+ CellChangeTimes->{
+  3.8127061698040333`*^9},ExpressionUUID->"1b29c343-00ce-43ca-85b9-\
+deb58c937bf1"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"h", "=", 
+   RowBox[{"1", "/", "20"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"u0", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"RandomReal", "[", "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"y", ",", "0", ",", "1", ",", "h"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", "0", ",", "1", ",", "h"}], "}"}]}], "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"v10i", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"RandomReal", "[", "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"y", ",", "0", ",", "1", ",", "h"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", "0", ",", "1", ",", "h"}], "}"}]}], "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"v20i", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"RandomReal", "[", "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"y", ",", "0", ",", "1", ",", "h"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", "0", ",", "1", ",", "h"}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"v10", "=", 
+   RowBox[{"v10i", "/", 
+    RowBox[{"(", 
+     RowBox[{"v10i", "+", "v20i", "+", 
+      RowBox[{"(", 
+       RowBox[{"2", "-", "v10i", "-", "v20i"}], ")"}]}], ")"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"v20", "=", 
+   RowBox[{"v20i", "/", 
+    RowBox[{"(", 
+     RowBox[{"v10i", "+", "v20i", "+", 
+      RowBox[{"(", 
+       RowBox[{"2", "-", "v10i", "-", "v20i"}], ")"}]}], ")"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"RDDensityPlots", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"u0", ",", "v10", ",", "v20"}], "}"}], ",", " ", 
+    RowBox[{"ImageSize", " ", "\[Rule]", " ", "Small"}]}], "]"}], 
+  ";"}]}], "Input",
+ CellChangeTimes->{
+  3.812706176948913*^9, {3.8202771861299133`*^9, 3.8202772050620937`*^9}, {
+   3.8202773313481293`*^9, 3.820277351424371*^9}, {3.820277435022914*^9, 
+   3.820277466644659*^9}},
+ CellLabel->
+  "In[306]:=",ExpressionUUID->"cc94ffad-451a-4089-9090-e1b6033dce68"],
+
+Cell["These strategists diffuse with rates d1, d2 and d3: ", "Text",
+ CellChangeTimes->{
+  3.812706191520639*^9},ExpressionUUID->"6334f19b-ab32-485b-bab2-\
+f27ea3d4f76f"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Symbiont", " ", "Diffusion", " ", "rate"}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"d1", " ", "=", " ", "0.00008"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Host", " ", "Diffusion", " ", "rate"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"d2", " ", "=", " ", "0.00008"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"d3", " ", "=", " ", "0.00008"}], ";"}], " "}]}]], "Input",
+ CellChangeTimes->{{3.8127061978096857`*^9, 3.812706198972968*^9}},
+ CellLabel->
+  "In[314]:=",ExpressionUUID->"c4411181-1346-4534-b1e4-05dd5c7b50c4"],
+
+Cell[BoxData[
+ RowBox[{"Legended", "[", 
+  RowBox[{
+   RowBox[{"RDDensityPlots", "[", 
+    RowBox[{"ANTAG", ",", " ", 
+     RowBox[{"{", 
+      RowBox[{"u", ",", "v1", ",", "v2"}], "}"}], ",", " ", 
+     RowBox[{"{", 
+      RowBox[{"u0", ",", "v10", ",", "v20"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"d1", ",", "d2", ",", "d3"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "1000", ",", "1"}], "}"}], ",", " ", 
+     RowBox[{"ImageSize", " ", "\[Rule]", " ", "Large"}], ",", " ", 
+     RowBox[{"PlotLegends", " ", "\[Rule]", " ", "Automatic"}], ",", " ", 
+     RowBox[{"ColorFunction", "\[Rule]", " ", "\"\<BlueGreenYellow\>\""}]}], 
+    "]"}], ",", 
+   RowBox[{"BarLegend", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\"\<BlueGreenYellow\>\"", ",", 
+       RowBox[{"{", 
+        RowBox[{"0", ",", "1"}], "}"}]}], "}"}], ",", 
+     RowBox[{"LegendLayout", "\[Rule]", "\"\<Column\>\""}]}], "]"}]}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.812706217784794*^9, 3.8127062449065228`*^9}, {
+  3.820277207220112*^9, 3.82027720908459*^9}, {3.8202773543059473`*^9, 
+  3.820277355091588*^9}},
+ CellLabel->
+  "In[319]:=",ExpressionUUID->"bf98872b-20c8-4221-a824-815d36dd235a"],
+
+Cell["We consider a high diffusion rate: ", "Text",
+ CellChangeTimes->{{3.81270632141192*^9, 
+  3.812706345426*^9}},ExpressionUUID->"6c7a59ee-9f64-4d2c-a6a4-c08ff227daaf"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Symbiont", " ", "Diffusion", " ", "rate"}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"d1", " ", "=", " ", "0.008"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Host", " ", "Diffusion", " ", "rate"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"d2", " ", "=", " ", "0.008"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"d3", " ", "=", " ", "0.008"}], ";"}], " "}]}]], "Input",
+ CellChangeTimes->{{3.81270635485378*^9, 3.812706358594236*^9}},
+ CellLabel->
+  "In[320]:=",ExpressionUUID->"83337841-f149-44d3-a3fd-48135ff03e1f"],
+
+Cell[BoxData[
+ RowBox[{"Legended", "[", 
+  RowBox[{
+   RowBox[{"RDDensityPlots", "[", 
+    RowBox[{"ANTAG", ",", " ", 
+     RowBox[{"{", 
+      RowBox[{"u", ",", "v1", ",", "v2"}], "}"}], ",", " ", 
+     RowBox[{"{", 
+      RowBox[{"u0", ",", "v10", ",", "v20"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"d1", ",", "d2", ",", "d3"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "1000", ",", "1"}], "}"}], ",", " ", 
+     RowBox[{"ImageSize", " ", "\[Rule]", " ", "Large"}], ",", " ", 
+     RowBox[{"PlotLegends", " ", "\[Rule]", " ", "Automatic"}], ",", " ", 
+     RowBox[{"ColorFunction", "\[Rule]", " ", "\"\<BlueGreenYellow\>\""}]}], 
+    "]"}], ",", 
+   RowBox[{"BarLegend", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\"\<BlueGreenYellow\>\"", ",", 
+       RowBox[{"{", 
+        RowBox[{"0", ",", "1"}], "}"}]}], "}"}], ",", 
+     RowBox[{"LegendLayout", "\[Rule]", "\"\<Column\>\""}]}], "]"}]}], 
+  "]"}]], "Input",
+ CellChangeTimes->{
+  3.812706369704673*^9, {3.820277211010573*^9, 3.820277212819356*^9}, {
+   3.820277363829895*^9, 3.82027736443964*^9}},
+ CellLabel->
+  "In[323]:=",ExpressionUUID->"106fb583-55f2-4b4d-be0d-a90703761130"],
+
+Cell["The entire plane syncs and fluctuates in the same fashion. ", "Text",
+ CellChangeTimes->{{3.8127064294432383`*^9, 
+  3.812706458849503*^9}},ExpressionUUID->"72841c63-72d7-4779-8473-\
+503b4287167c"],
+
+Cell["\<\
+Finally, consider the result of varying the diffusion rate of each \
+strategist, first well consider the case in which all strategists diffuse at \
+a similar rate: \
+\>", "Text",
+ CellChangeTimes->{{3.812706510947605*^9, 3.812706532149255*^9}, {
+  3.812706734307366*^9, 
+  3.812706757951921*^9}},ExpressionUUID->"67c3a7aa-bb9b-46b9-84ab-\
+3b6496d616e2"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Symbiont", " ", "Diffusion", " ", "rate"}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"d1", " ", "=", " ", "0.0008"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Host", " ", "Diffusion", " ", "rate"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"d2", " ", "=", " ", "0.00008"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"d3", " ", "=", " ", "0.00008"}], ";"}], " "}]}]], "Input",
+ CellChangeTimes->{{3.8127067659149857`*^9, 3.812706781210916*^9}},
+ CellLabel->
+  "In[324]:=",ExpressionUUID->"5fe68a91-8c39-452f-aec8-2c8167cd39c1"],
+
+Cell[BoxData[
+ RowBox[{"Legended", "[", 
+  RowBox[{
+   RowBox[{"RDDensityPlots", "[", 
+    RowBox[{"ANTAG", ",", " ", 
+     RowBox[{"{", 
+      RowBox[{"u", ",", "v1", ",", "v2"}], "}"}], ",", " ", 
+     RowBox[{"{", 
+      RowBox[{"u0", ",", "v10", ",", "v20"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"d1", ",", "d2", ",", "d3"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "1000", ",", "1"}], "}"}], ",", " ", 
+     RowBox[{"ImageSize", " ", "\[Rule]", " ", "Large"}], ",", " ", 
+     RowBox[{"PlotLegends", " ", "\[Rule]", " ", "Automatic"}], ",", " ", 
+     RowBox[{"ColorFunction", "\[Rule]", " ", "\"\<BlueGreenYellow\>\""}]}], 
+    "]"}], ",", 
+   RowBox[{"BarLegend", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\"\<BlueGreenYellow\>\"", ",", 
+       RowBox[{"{", 
+        RowBox[{"0", ",", "1"}], "}"}]}], "}"}], ",", 
+     RowBox[{"LegendLayout", "\[Rule]", "\"\<Column\>\""}]}], "]"}]}], 
+  "]"}]], "Input",
+ CellChangeTimes->{
+  3.812706770203343*^9, {3.82027722545828*^9, 3.8202772406962967`*^9}, {
+   3.820277368677514*^9, 3.82027736942437*^9}},
+ CellLabel->
+  "In[327]:=",ExpressionUUID->"7086ae23-38ec-45c0-9416-9530f4aa0729"],
+
+Cell["Now we\[CloseCurlyQuote]ll vary the rate of diffusion of strategists: \
+", "Text",
+ CellChangeTimes->{{3.81270679721502*^9, 
+  3.81270680505425*^9}},ExpressionUUID->"9cd0d000-f975-4f89-98be-\
+e9e976bcbcbb"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Symbiont", " ", "Diffusion", " ", "rate"}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"d1", " ", "=", " ", "0.0008"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Host", " ", "Diffusion", " ", "rate"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"d2", " ", "=", " ", "0.00008"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"d3", " ", "=", " ", "0.00008"}], ";"}], " "}]}]], "Input",
+ CellChangeTimes->{{3.812706661784976*^9, 3.81270668716463*^9}},
+ CellLabel->
+  "In[328]:=",ExpressionUUID->"6171456d-7969-42d7-892e-4d65c6e21b62"],
+
+Cell[BoxData[
+ RowBox[{"Legended", "[", 
+  RowBox[{
+   RowBox[{"RDDensityPlots", "[", 
+    RowBox[{"ANTAG", ",", " ", 
+     RowBox[{"{", 
+      RowBox[{"u", ",", "v1", ",", "v2"}], "}"}], ",", " ", 
+     RowBox[{"{", 
+      RowBox[{"u0", ",", "v10", ",", "v20"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"d1", ",", "d2", ",", "d3"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "1000", ",", "1"}], "}"}], ",", " ", 
+     RowBox[{"ImageSize", " ", "\[Rule]", " ", "Large"}], ",", " ", 
+     RowBox[{"PlotLegends", " ", "\[Rule]", " ", "Automatic"}], ",", " ", 
+     RowBox[{"ColorFunction", "\[Rule]", " ", "\"\<BlueGreenYellow\>\""}]}], 
+    "]"}], ",", 
+   RowBox[{"BarLegend", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\"\<BlueGreenYellow\>\"", ",", 
+       RowBox[{"{", 
+        RowBox[{"0", ",", "1"}], "}"}]}], "}"}], ",", 
+     RowBox[{"LegendLayout", "\[Rule]", "\"\<Column\>\""}]}], "]"}]}], 
+  "]"}]], "Input",
+ CellChangeTimes->{
+  3.8127066749454203`*^9, {3.820277254250732*^9, 3.820277255037838*^9}, {
+   3.820277374085257*^9, 3.8202773748775673`*^9}},
+ CellLabel->
+  "In[331]:=",ExpressionUUID->"3ca3c8ee-2548-417c-ad85-d2816d665a81"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Symbiont", " ", "Diffusion", " ", "rate"}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"d1", " ", "=", " ", "0.00008"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Host", " ", "Diffusion", " ", "rate"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"d2", " ", "=", " ", "0.0008"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"d3", " ", "=", " ", "0.0008"}], ";"}], " "}]}]], "Input",
+ CellChangeTimes->{{3.812706835189971*^9, 3.812706840223823*^9}},
+ CellLabel->
+  "In[332]:=",ExpressionUUID->"471c46b4-5007-4b84-b86a-d3f04e846d91"],
+
+Cell[BoxData[
+ RowBox[{"Legended", "[", 
+  RowBox[{
+   RowBox[{"RDDensityPlots", "[", 
+    RowBox[{"ANTAG", ",", " ", 
+     RowBox[{"{", 
+      RowBox[{"u", ",", "v1", ",", "v2"}], "}"}], ",", " ", 
+     RowBox[{"{", 
+      RowBox[{"u0", ",", "v10", ",", "v20"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"d1", ",", "d2", ",", "d3"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "1000", ",", "1"}], "}"}], ",", " ", 
+     RowBox[{"ImageSize", " ", "\[Rule]", " ", "Large"}], ",", " ", 
+     RowBox[{"PlotLegends", " ", "\[Rule]", " ", "Automatic"}], ",", " ", 
+     RowBox[{"ColorFunction", "\[Rule]", " ", "\"\<BlueGreenYellow\>\""}]}], 
+    "]"}], ",", 
+   RowBox[{"BarLegend", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\"\<BlueGreenYellow\>\"", ",", 
+       RowBox[{"{", 
+        RowBox[{"0", ",", "1"}], "}"}]}], "}"}], ",", 
+     RowBox[{"LegendLayout", "\[Rule]", "\"\<Column\>\""}]}], "]"}]}], 
+  "]"}]], "Input",
+ CellChangeTimes->{
+  3.812706845631077*^9, {3.820277265831563*^9, 3.820277268976809*^9}, {
+   3.8202773788220654`*^9, 3.820277379333727*^9}},
+ CellLabel->
+  "In[335]:=",ExpressionUUID->"d084a611-c17d-4c7d-8b9f-415cae521054"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Symbiont", " ", "Diffusion", " ", "rate"}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"d1", " ", "=", " ", "0.00008"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Host", " ", "Diffusion", " ", "rate"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"d2", " ", "=", " ", "0.0008"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"d3", " ", "=", " ", "0.00008"}], ";"}], " "}]}]], "Input",
+ CellChangeTimes->{{3.8127068538519907`*^9, 3.8127068557902327`*^9}},
+ CellLabel->
+  "In[336]:=",ExpressionUUID->"94115f94-8bd9-4a88-b20f-57ced2627942"],
+
+Cell[BoxData[
+ RowBox[{"Legended", "[", 
+  RowBox[{
+   RowBox[{"RDDensityPlots", "[", 
+    RowBox[{"ANTAG", ",", " ", 
+     RowBox[{"{", 
+      RowBox[{"u", ",", "v1", ",", "v2"}], "}"}], ",", " ", 
+     RowBox[{"{", 
+      RowBox[{"u0", ",", "v10", ",", "v20"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"d1", ",", "d2", ",", "d3"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "1000", ",", "1"}], "}"}], ",", " ", 
+     RowBox[{"ImageSize", " ", "\[Rule]", " ", "Large"}], ",", " ", 
+     RowBox[{"PlotLegends", " ", "\[Rule]", " ", "Automatic"}], ",", " ", 
+     RowBox[{"ColorFunction", "\[Rule]", " ", "\"\<BlueGreenYellow\>\""}]}], 
+    "]"}], ",", 
+   RowBox[{"BarLegend", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\"\<BlueGreenYellow\>\"", ",", 
+       RowBox[{"{", 
+        RowBox[{"0", ",", "1"}], "}"}]}], "}"}], ",", 
+     RowBox[{"LegendLayout", "\[Rule]", "\"\<Column\>\""}]}], "]"}]}], 
+  "]"}]], "Input",
+ CellChangeTimes->{
+  3.812706861719495*^9, {3.820277297415453*^9, 3.820277300432192*^9}, {
+   3.820277383862299*^9, 3.8202773846286707`*^9}},
+ CellLabel->
+  "In[339]:=",ExpressionUUID->"52b42640-dde9-48d2-9406-4dffc84365ea"],
+
+Cell["\<\
+The pattern of oscillation always syncs with that of the strategist with the \
+greatest diffusion rate. \
+\>", "Text",
+ CellChangeTimes->{{3.8127068758634367`*^9, 
+  3.812706891340358*^9}},ExpressionUUID->"36e931e0-8c4f-44f0-adb6-\
+53149d4810d4"],
+
+Cell["\<\
+Finally consider a population in which generalists receive a greater average \
+payoff than specialists: \
+\>", "Text",
+ CellChangeTimes->{{3.8127068954941473`*^9, 
+  3.812706908950736*^9}},ExpressionUUID->"348d8086-be87-4c05-9703-\
+3906debdb0f8"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ANTAGG", "=", " ", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"-", "1"}], "+", "u"}], ")"}], " ", "u", " ", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"-", "v1"}], "+", "v2"}], ")"}], " ", "x", " ", 
+       RowBox[{"(", 
+        RowBox[{"f\[Alpha]", "-", "\[Alpha]"}], ")"}]}], ",", 
+      RowBox[{"v1", " ", "x", " ", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"-", "f\[Alpha]"}], " ", 
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"-", "1"}], "+", "v1", "+", 
+            RowBox[{"u", " ", 
+             RowBox[{"(", 
+              RowBox[{"1", "-", "v1", "+", "v2"}], ")"}]}]}], ")"}]}], "+", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"u", "-", 
+            RowBox[{"u", " ", "v1"}], "+", 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"-", "1"}], "+", "u"}], ")"}], " ", "v2"}]}], ")"}], 
+          " ", "\[Alpha]"}], "+", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"-", "1"}], "+", "v1", "+", "v2"}], ")"}], " ", 
+          "\[Alpha]g"}]}], ")"}]}], ",", 
+      RowBox[{"v2", " ", "x", " ", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"-", "f\[Alpha]"}], " ", "v1"}], "+", 
+         RowBox[{"u", " ", 
+          RowBox[{"(", 
+           RowBox[{"1", "+", "v1", "-", "v2"}], ")"}], " ", 
+          RowBox[{"(", 
+           RowBox[{"f\[Alpha]", "-", "\[Alpha]"}], ")"}]}], "+", "\[Alpha]", 
+         "-", 
+         RowBox[{"v2", " ", "\[Alpha]"}], "+", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"-", "1"}], "+", "v1", "+", "v2"}], ")"}], " ", 
+          "\[Alpha]g"}]}], ")"}]}]}], "}"}], "//.", " ", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"f\[Alpha]", "\[Rule]", " ", "0.1"}], ",", 
+      RowBox[{"\[Alpha]", "\[Rule]", " ", "0.55"}], ",", " ", 
+      RowBox[{"\[Alpha]g", " ", "\[Rule]", " ", "0.5"}], ",", " ", 
+      RowBox[{"x", "\[Rule]", " ", "0.5"}]}], "}"}]}]}], ";"}]], "Input",
+ CellChangeTimes->{
+  3.812706925370776*^9, 3.812706963470521*^9, {3.820277723299946*^9, 
+   3.82027775954862*^9}},
+ CellLabel->
+  "In[340]:=",ExpressionUUID->"aaff6fed-1109-4ded-ac8f-4bcca81cc62d"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Symbiont", " ", "Diffusion", " ", "rate"}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"d1", " ", "=", " ", "0.00008"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Host", " ", "Diffusion", " ", "rate"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"d2", " ", "=", " ", "0.00008"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"d3", " ", "=", " ", "0.00008"}], ";"}], " "}]}]], "Input",
+ CellChangeTimes->{{3.812706945667947*^9, 3.8127069676798677`*^9}},
+ CellLabel->
+  "In[341]:=",ExpressionUUID->"48f2fd6e-0356-4c8b-b3f4-2aa5a3ba513a"],
+
+Cell[BoxData[
+ RowBox[{"Legended", "[", 
+  RowBox[{
+   RowBox[{"RDDensityPlots", "[", 
+    RowBox[{"ANTAGG", ",", " ", 
+     RowBox[{"{", 
+      RowBox[{"u", ",", "v1", ",", "v2"}], "}"}], ",", " ", 
+     RowBox[{"{", 
+      RowBox[{"u0", ",", "v10", ",", "v20"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"d1", ",", "d2", ",", "d3"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "1000", ",", "1"}], "}"}], ",", " ", 
+     RowBox[{"ImageSize", " ", "\[Rule]", " ", "Large"}], ",", " ", 
+     RowBox[{"PlotLegends", " ", "\[Rule]", " ", "Automatic"}], ",", " ", 
+     RowBox[{"ColorFunction", "\[Rule]", " ", "\"\<BlueGreenYellow\>\""}]}], 
+    "]"}], ",", 
+   RowBox[{"BarLegend", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\"\<BlueGreenYellow\>\"", ",", 
+       RowBox[{"{", 
+        RowBox[{"0", ",", "1"}], "}"}]}], "}"}], ",", 
+     RowBox[{"LegendLayout", "\[Rule]", "\"\<Column\>\""}]}], "]"}]}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.812706956612039*^9, 3.812706958142185*^9}, {
+  3.820277306639805*^9, 3.8202773076941*^9}, {3.820277397398375*^9, 
+  3.8202773982228193`*^9}},
+ CellLabel->
+  "In[344]:=",ExpressionUUID->"9f543dad-50d7-45d1-a84b-65535dbfd90f"],
+
+Cell["\<\
+Both specialists go extinct, and symbiont frequency fluctuates. \
+\>", "Text",
+ CellChangeTimes->{{3.812706983280753*^9, 
+  3.812706997161767*^9}},ExpressionUUID->"3d0a03aa-9225-4c70-a6b5-\
+092d7ecb7503"]
+},
+WindowSize->{808, 699},
+WindowMargins->{{60, Automatic}, {-234, Automatic}},
+FrontEndVersion->"12.1 for Mac OS X x86 (64-bit) (March 18, 2020)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"129175d8-4004-4534-a847-56d00104a6ad"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 203, 4, 30, "Input",ExpressionUUID->"04cf2869-b07a-4f5d-be1a-6a35b049f498"],
+Cell[764, 26, 390, 10, 35, "Text",ExpressionUUID->"58cf19de-992c-4c7c-af7d-5fcd84780e72"],
+Cell[1157, 38, 301, 7, 30, "Input",ExpressionUUID->"957d48c8-6b8d-4753-b703-0149b55a952d"],
+Cell[1461, 47, 429, 9, 35, "Text",ExpressionUUID->"02e328c6-8959-46ad-9db1-796a147418fc"],
+Cell[1893, 58, 193, 3, 35, "Text",ExpressionUUID->"2d306df9-f0b2-42fb-a10f-37e945d93751"],
+Cell[2089, 63, 2490, 68, 115, "Input",ExpressionUUID->"ea6df3e3-7f9a-4df3-9517-0fac10a02747"],
+Cell[4582, 133, 551, 10, 81, "Text",ExpressionUUID->"275d7bc3-289a-4ced-852e-5b157f5381d5"],
+Cell[5136, 145, 267, 6, 58, "Text",ExpressionUUID->"1b29c343-00ce-43ca-85b9-deb58c937bf1"],
+Cell[5406, 153, 2003, 62, 157, "Input",ExpressionUUID->"cc94ffad-451a-4089-9090-e1b6033dce68"],
+Cell[7412, 217, 170, 3, 35, "Text",ExpressionUUID->"6334f19b-ab32-485b-bab2-f27ea3d4f76f"],
+Cell[7585, 222, 662, 17, 115, "Input",ExpressionUUID->"c4411181-1346-4534-b1e4-05dd5c7b50c4"],
+Cell[8250, 241, 1198, 29, 94, "Input",ExpressionUUID->"bf98872b-20c8-4221-a824-815d36dd235a"],
+Cell[9451, 272, 171, 2, 35, "Text",ExpressionUUID->"6c7a59ee-9f64-4d2c-a6a4-c08ff227daaf"],
+Cell[9625, 276, 653, 17, 115, "Input",ExpressionUUID->"83337841-f149-44d3-a3fd-48135ff03e1f"],
+Cell[10281, 295, 1171, 29, 94, "Input",ExpressionUUID->"106fb583-55f2-4b4d-be0d-a90703761130"],
+Cell[11455, 326, 203, 3, 35, "Text",ExpressionUUID->"72841c63-72d7-4779-8473-503b4287167c"],
+Cell[11661, 331, 363, 8, 58, "Text",ExpressionUUID->"67c3a7aa-bb9b-46b9-84ab-3b6496d616e2"],
+Cell[12027, 341, 661, 17, 115, "Input",ExpressionUUID->"5fe68a91-8c39-452f-aec8-2c8167cd39c1"],
+Cell[12691, 360, 1172, 29, 94, "Input",ExpressionUUID->"7086ae23-38ec-45c0-9416-9530f4aa0729"],
+Cell[13866, 391, 212, 4, 35, "Text",ExpressionUUID->"9cd0d000-f975-4f89-98be-e9e976bcbcbb"],
+Cell[14081, 397, 658, 17, 115, "Input",ExpressionUUID->"6171456d-7969-42d7-892e-4d65c6e21b62"],
+Cell[14742, 416, 1176, 29, 94, "Input",ExpressionUUID->"3ca3c8ee-2548-417c-ad85-d2816d665a81"],
+Cell[15921, 447, 658, 17, 115, "Input",ExpressionUUID->"471c46b4-5007-4b84-b86a-d3f04e846d91"],
+Cell[16582, 466, 1174, 29, 94, "Input",ExpressionUUID->"d084a611-c17d-4c7d-8b9f-415cae521054"],
+Cell[17759, 497, 663, 17, 115, "Input",ExpressionUUID->"94115f94-8bd9-4a88-b20f-57ced2627942"],
+Cell[18425, 516, 1174, 29, 94, "Input",ExpressionUUID->"52b42640-dde9-48d2-9406-4dffc84365ea"],
+Cell[19602, 547, 256, 6, 35, "Text",ExpressionUUID->"36e931e0-8c4f-44f0-adb6-53149d4810d4"],
+Cell[19861, 555, 256, 6, 35, "Text",ExpressionUUID->"348d8086-be87-4c05-9703-3906debdb0f8"],
+Cell[20120, 563, 2349, 67, 115, "Input",ExpressionUUID->"aaff6fed-1109-4ded-ac8f-4bcca81cc62d"],
+Cell[22472, 632, 662, 17, 115, "Input",ExpressionUUID->"48f2fd6e-0356-4c8b-b3f4-2aa5a3ba513a"],
+Cell[23137, 651, 1196, 29, 94, "Input",ExpressionUUID->"9f543dad-50d7-45d1-a84b-65535dbfd90f"],
+Cell[24336, 682, 214, 5, 35, "Text",ExpressionUUID->"3d0a03aa-9225-4c70-a6b5-092d7ecb7503"]
+}
+]
+*)
+
