@@ -7,4 +7,6 @@ Code for linear stability analysis, and center manifold theory stability analysi
 ### Antagonistic Invasion Simulations
 Code simulating the success of mutant invaders in a cycling population for adaptive dynamics: antagonistically specialized hosts. 
 ### Antagonistic Spatial Simulations
+Code simulating the diffusion of hosts and symbionts across space as a system of Partial Differential Equations: cooperatively specialized hosts. 
+### Antagonistic Spatial Simulations
 Code simulating the diffusion of hosts and symbionts across space as a system of Partial Differential Equations: antagonistically specialized hosts. 
