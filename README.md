@@ -12,3 +12,5 @@ Code simulating the diffusion of hosts and symbionts across space as a system of
 Using Partial Differential Equations for cooperatively specialized hosts we evaluate the success of generalist hosts when generalist payoff exceeds specialist average payoff and the diffusion rate of hosts and symbionts varies. 
 ### Antagonistic Spatial Simulations
 Code simulating the diffusion of hosts and symbionts across space as a system of Partial Differential Equations: antagonistically specialized hosts. Requires: [Reaction Diffusion Lab](https://library.wolfram.com/infocenter/MathSource/4433/)
+### Limit Cycle Simulations Fitness Feedback
+Code simulating qualitative behaviour of antagonistic specialization when fitness feedbacks determine host and symbiont fitness
