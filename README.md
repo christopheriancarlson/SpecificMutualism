@@ -7,7 +7,7 @@ Code for linear stability analysis, and theory of bifurcation without parameters
 ### Antagonistic Invasion Analysis
 Code simulating the success of mutant invaders in a cycling population for adaptive dynamics: antagonistically specialized hosts. 
 ### Antagonistic Parameter Evolution 
-Code simulating the success of mutant invaders of either host or symbiont type in a cycling population for adaptive dynamics: antagonistically specialized hosts. 
+Code simulating the success of mutant invaders of either host or symbiont type in a cycling population for adaptive dynamics: antagonistically specialized hosts. This code generates figures 5 and SI-4. 
 ### Cooperative Spatial Simulations
 Code simulating the diffusion of hosts and symbionts across space as a system of Partial Differential Equations: cooperatively specialized hosts. Requires: [Reaction Diffusion Lab](https://library.wolfram.com/infocenter/MathSource/4433/)
 ### Cooperative Spatial Simulations
